@@ -12,7 +12,8 @@ canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 
 /* 선 굵기, 모양 설정 */
-ctx.lineWidth = 3;
+const lineWidth = document.getElementById("line-width");
+ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
 
 /* 마우스 눌렀을 때 선 그리기 시작 */
@@ -41,8 +42,16 @@ function cancelPainting() {
   ctx.beginPath();  // 새로운 경로 만들기
 }
 
+/* 선 굵기 조절 */
+function onLineWidthChange(event) {
+  ctx.lineWidth = event.target.value;
+}
+
 /* 마우스로 선 그리기 이벤트 추가 */
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mousemove", moveMouse);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
+
+/* 선 굵기 조절하는 이벤트 추가 */
+lineWidth.addEventListener("change", onLineWidthChange);
