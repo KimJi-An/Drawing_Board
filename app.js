@@ -53,7 +53,9 @@ function onLineWidthChange(event) {
 
 /* 사용자가 기본 색상을 선택 */
 function onColorClick(event) {
-  
+  const colorValue = event.target.attributes[2].value;
+  ctx.strokeStyle = colorValue;
+  ctx.fillStyle = colorValue;
 }
 
 /* 사용자가 기본 색상 외의 색을 선택 */
@@ -73,5 +75,5 @@ canvas.addEventListener("mouseleave", cancelPainting);
 lineWidth.addEventListener("change", onLineWidthChange);
 
 /* 사용자가 선택한 색으로 바꾸는 이벤트 추가 */
-colors.forEach(color => color.addEventListener("change", onColorClick));
+colors.forEach(color => color.addEventListener("click", onColorClick));
 color.addEventListener("change", onColorChange);
