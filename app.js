@@ -16,6 +16,10 @@ const lineWidth = document.getElementById("line-width");
 ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
 
+/* 사용자가 선택한 색상 */
+const colors = Array.from(document.getElementsByClassName("color"));
+const color = document.getElementById("color-option");
+
 /* 마우스 눌렀을 때 선 그리기 시작 */
 function startPainting() {
   isPainting = true;
@@ -47,6 +51,18 @@ function onLineWidthChange(event) {
   ctx.lineWidth = event.target.value;
 }
 
+/* 사용자가 기본 색상을 선택 */
+function onColorClick(event) {
+  
+}
+
+/* 사용자가 기본 색상 외의 색을 선택 */
+function onColorChange(event) {
+  const colorValue = event.target.value;
+  ctx.strokeStyle = colorValue;
+  ctx.fillStyle = colorValue;
+}
+
 /* 마우스로 선 그리기 이벤트 추가 */
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mousemove", moveMouse);
@@ -55,3 +71,7 @@ canvas.addEventListener("mouseleave", cancelPainting);
 
 /* 선 굵기 조절하는 이벤트 추가 */
 lineWidth.addEventListener("change", onLineWidthChange);
+
+/* 사용자가 선택한 색으로 바꾸는 이벤트 추가 */
+colors.forEach(color => color.addEventListener("change", onColorClick));
+color.addEventListener("change", onColorChange);
