@@ -23,17 +23,18 @@ canvas {
   margin-left: 120px;
 }
 
-.btn {
+button, label {
   width: 150px;
   height: 40px;
   background-color: ghostwhite;
   border: none;
   border-radius: 30px;
   font-size: 17px;
+  text-align: center;
   cursor: pointer;
 }
 
-.btn:hover {
+button:hover, label:hover {
   transform: scale(1.2);
 }
 
@@ -66,6 +67,10 @@ canvas {
 #line-width {
   width: 180px;
 }
+
+/* #image {
+  display: none;
+} */
 
 #text {
   width: 250px;
