@@ -6,6 +6,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 let isPainting = false;  // 선을 그리는 중인지 나타냄
+let isFilling = false;  // 채우기 모드인지 나타냄
 
 /* 캔버스 크기 설정 */
 canvas.width = CANVAS_WIDTH;
@@ -20,6 +21,7 @@ ctx.lineCap = "round";
 const colors = Array.from(document.getElementsByClassName("color"));
 const color = document.getElementById("color-option");
 
+const modeBtn = document.getElementById("mode");  // 모드 버튼
 const eraseBtn = document.getElementById("erase");  // 지우기 버튼
 
 /* 마우스 눌렀을 때 선 그리기 시작 */
@@ -67,6 +69,27 @@ function onColorChange(event) {
   ctx.fillStyle = colorValue;
 }
 
+/* 모드 버튼을 눌렀을 때 */
+function onModeClick() {
+  // 누른 버튼이 '그리기'인 경우
+  if(isFilling) {
+    isFilling = false;
+    modeBtn.innerText = "🩸 채우기";
+  }
+  // 누른 버튼이 '채우기'인 경우
+  else {
+    isFilling = true;
+    modeBtn.innerText = "🖌️ 그리기";
+  }
+}
+
+/* 채우기 버튼을 누른 후 캔버스를 클릭했을 때 */
+function onCanvasClick(event) {
+  if(isFilling) {
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  }
+}
+
 /* 지우기 버튼을 눌렀을 때 */
 function onEraserClick() {
   const colorValue = "#FFFFFF";
@@ -86,6 +109,10 @@ lineWidth.addEventListener("change", onLineWidthChange);
 /* 사용자가 선택한 색으로 바꾸는 이벤트 추가 */
 colors.forEach(color => color.addEventListener("click", onColorClick));
 color.addEventListener("change", onColorChange);
+
+/* 모드 버튼을 눌렀을 때의 이벤트 추가 */
+modeBtn.addEventListener("click", onModeClick);
+canvas.addEventListener("click", onCanvasClick);  // 채우기 모드로 전환 후 캔버스 클릭
 
 /* 지우기 이벤트 추가 */
 eraseBtn.addEventListener("click", onEraserClick);
