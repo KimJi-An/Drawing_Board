@@ -23,6 +23,7 @@ const color = document.getElementById("color-option");
 
 const modeBtn = document.getElementById("mode");  // 모드 버튼
 const eraseBtn = document.getElementById("erase");  // 지우기 버튼
+const destroyBtn = document.getElementById("destroy");  // 초기화 버튼
 
 /* 마우스 눌렀을 때 선 그리기 시작 */
 function startPainting() {
@@ -97,6 +98,12 @@ function onEraserClick() {
   ctx.fillStyle = colorValue;
 }
 
+/* 초기화 버튼을 눌렀을 때 */
+function onDestroyClick() {
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
 /* 마우스로 선 그리기 이벤트 추가 */
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mousemove", moveMouse);
@@ -114,5 +121,8 @@ color.addEventListener("change", onColorChange);
 modeBtn.addEventListener("click", onModeClick);
 canvas.addEventListener("click", onCanvasClick);  // 채우기 모드로 전환 후 캔버스 클릭
 
-/* 지우기 이벤트 추가 */
+/* 지우기 버튼을 눌렀을 때의 이벤트 추가 */
 eraseBtn.addEventListener("click", onEraserClick);
+
+/* 초기화 버튼을 눌렀을 때의 이벤트 추가 */
+destroyBtn.addEventListener("click", onDestroyClick);
