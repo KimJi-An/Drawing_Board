@@ -20,6 +20,8 @@ ctx.lineCap = "round";
 const colors = Array.from(document.getElementsByClassName("color"));
 const color = document.getElementById("color-option");
 
+const eraseBtn = document.getElementById("erase");  // 지우기 버튼
+
 /* 마우스 눌렀을 때 선 그리기 시작 */
 function startPainting() {
   isPainting = true;
@@ -65,6 +67,13 @@ function onColorChange(event) {
   ctx.fillStyle = colorValue;
 }
 
+/* 지우기 버튼을 눌렀을 때 */
+function onEraserClick() {
+  const colorValue = "#FFFFFF";
+  ctx.strokeStyle = colorValue;
+  ctx.fillStyle = colorValue;
+}
+
 /* 마우스로 선 그리기 이벤트 추가 */
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mousemove", moveMouse);
@@ -77,3 +86,6 @@ lineWidth.addEventListener("change", onLineWidthChange);
 /* 사용자가 선택한 색으로 바꾸는 이벤트 추가 */
 colors.forEach(color => color.addEventListener("click", onColorClick));
 color.addEventListener("change", onColorChange);
+
+/* 지우기 이벤트 추가 */
+eraseBtn.addEventListener("click", onEraserClick);

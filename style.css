@@ -47,13 +47,9 @@ canvas {
   display: flex;
   flex-direction: column;
   padding: 25px;
-  gap: 20px;
+  gap: 35px;
   align-items: center;
 }
-
-/* .color-option {
-  
-} */
 
 .color {
   width: 70px;
