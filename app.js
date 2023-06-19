@@ -26,6 +26,7 @@ const modeBtn = document.getElementById("mode");  // 모드 버튼
 const eraseBtn = document.getElementById("erase");  // 지우기 버튼
 const destroyBtn = document.getElementById("destroy");  // 초기화 버튼
 const fileBtn = document.getElementById("file");  // 사진 추가 버튼
+const downloadBtn = document.getElementById("download");  // 저장하기 버튼
 
 const textInput = document.getElementById("text");  // 입력받은 텍스트
 
@@ -132,6 +133,15 @@ function onDoubleClick(event) {
   }
 }
 
+/* 저장하기 버튼을 클릭했을 때 */
+function onDownloadClick() {
+  const url = canvas.toDataURL();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "myDrawing.png";
+  a.click();
+}
+
 /* 마우스로 선 그리기 이벤트 추가 */
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mousemove", moveMouse);
@@ -151,6 +161,7 @@ canvas.addEventListener("click", onCanvasClick);  // 채우기 모드로 전환 
 eraseBtn.addEventListener("click", onEraserClick);  // 지우기 버튼 클릭
 destroyBtn.addEventListener("click", onDestroyClick);  // 초기화 버튼 클릭
 fileBtn.addEventListener("change", onFileChange);  // 사진 추가 버튼 클릭
+downloadBtn.addEventListener("click", onDownloadClick);  // 저장하기 버튼 클릭
 
 /* 캔버스 더블 클릭 시의 이벤트 추가 */
 canvas.addEventListener("dblclick", onDoubleClick);
