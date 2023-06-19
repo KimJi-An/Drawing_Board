@@ -25,7 +25,9 @@ const color = document.getElementById("color-option");
 const modeBtn = document.getElementById("mode");  // 모드 버튼
 const eraseBtn = document.getElementById("erase");  // 지우기 버튼
 const destroyBtn = document.getElementById("destroy");  // 초기화 버튼
-const imageBtn = document.getElementById("image");  // 사진 추가 버튼
+const fileBtn = document.getElementById("file");  // 사진 추가 버튼
+
+const textInput = document.getElementById("text");  // 입력받은 텍스트
 
 /* 마우스 눌렀을 때 선 그리기 시작 */
 function startPainting() {
@@ -107,14 +109,26 @@ function onDestroyClick() {
 }
 
 /* 사진 추가 버튼을 눌렀을 때 */
-function onImageChange(event) {
+function onFileChange(event) {
   const file = event.target.files[0];
   const url = URL.createObjectURL(file);
   const image = new Image();
   image.src = url;
   image.onload = function() {
     ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    imageBtn.value = null;
+    fileBtn.value = null;
+  }
+}
+
+/* 캔버스를 더블 클릭했을 때 */
+function onDoubleClick(event) {
+  const text = textInput.value;
+  if(text !== "") {
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.font = "30px serif";
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    ctx.restore();
   }
 }
 
@@ -136,4 +150,7 @@ modeBtn.addEventListener("click", onModeClick);
 canvas.addEventListener("click", onCanvasClick);  // 채우기 모드로 전환 후 캔버스 클릭
 eraseBtn.addEventListener("click", onEraserClick);  // 지우기 버튼 클릭
 destroyBtn.addEventListener("click", onDestroyClick);  // 초기화 버튼 클릭
-imageBtn.addEventListener("change", onImageChange);  // 사진 추가 버튼 클릭
+fileBtn.addEventListener("change", onFileChange);  // 사진 추가 버튼 클릭
+
+/* 캔버스 더블 클릭 시의 이벤트 추가 */
+canvas.addEventListener("dblclick", onDoubleClick);
