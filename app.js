@@ -28,6 +28,7 @@ const destroyBtn = document.getElementById("destroy");  // 초기화 버튼
 const fileBtn = document.getElementById("file");  // 사진 추가 버튼
 const downloadBtn = document.getElementById("download");  // 저장하기 버튼
 
+/* 텍스트 입력 */
 const textInput = document.getElementById("text");  // 입력받은 텍스트
 
 /* 마우스 눌렀을 때 선 그리기 시작 */
@@ -109,7 +110,7 @@ function onDestroyClick() {
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
-/* 사진 추가 버튼을 눌렀을 때 */
+/* 사진을 추가했을 때 */
 function onFileChange(event) {
   const file = event.target.files[0];
   const url = URL.createObjectURL(file);
